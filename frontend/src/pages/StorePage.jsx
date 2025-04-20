@@ -13,7 +13,7 @@ const StorePage = () => {
   const { addToCart } = useCart();
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/api/products/${storeId}`)
+    axios.get(`https://hyperlocal-store01.onrender.com/api/products/${storeId}`)
       .then(res => {
         setProducts(res.data);
         setLoading(false); // Set loading to false once products are fetched

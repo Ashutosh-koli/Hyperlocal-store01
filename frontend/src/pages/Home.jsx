@@ -21,7 +21,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/stores')
+    axios.get('https://hyperlocal-store01.onrender.com/api/stores')
       .then(res => {
         setStores(res.data);
         setFilteredStores(res.data);

@@ -28,7 +28,7 @@ const CartPage = () => {
         quantity: item.quantity
       }));
 
-      await axios.post('http://localhost:3000/api/orders', {
+      await axios.post('https://hyperlocal-store01.onrender.com/api/orders', {
         name: userName,
         products,
         total
