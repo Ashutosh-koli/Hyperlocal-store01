@@ -22,24 +22,28 @@ const run = async () => {
       { name: 'Local Greens', location: 'Koramangala' }
     ]);
 
+    console.log("🏪 Inserted Stores:");
+    stores.forEach(s => console.log(`${s.name}: ${s._id}`));
+
     const [freshMart, organicHub, localGreens] = stores;
 
-    // Insert products for each store
-    await Product.insertMany([
-      // Fresh Mart
+    const insertedProducts = await Product.insertMany([
       { name: 'Apple', price: 150, storeId: freshMart._id },
       { name: 'Banana', price: 50, storeId: freshMart._id },
 
-      // Organic Hub
       { name: 'Avocado', price: 200, storeId: organicHub._id },
       { name: 'Broccoli', price: 60, storeId: organicHub._id },
       { name: 'Sweet Potato', price: 40, storeId: organicHub._id },
 
-      // Local Greens
       { name: 'Carrot', price: 30, storeId: localGreens._id },
       { name: 'Spinach', price: 25, storeId: localGreens._id },
       { name: 'Cabbage', price: 35, storeId: localGreens._id },
     ]);
+
+    console.log("🛒 Inserted Products:");
+    insertedProducts.forEach(p => {
+      console.log(`${p.name} - ₹${p.price} - Store ID: ${p.storeId}`);
+    });
 
     console.log('✅ Seed data inserted successfully!');
     process.exit();
