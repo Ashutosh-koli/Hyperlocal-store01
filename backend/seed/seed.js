@@ -28,18 +28,18 @@ const run = async () => {
     const [freshMart, organicHub, localGreens] = stores;
 
     const insertedProducts = await Product.insertMany([
-      { name: 'Apple', price: 150, storeId: freshMart._id },
-      { name: 'Banana', price: 50, storeId: freshMart._id },
-
-      { name: 'Avocado', price: 200, storeId: organicHub._id },
-      { name: 'Broccoli', price: 60, storeId: organicHub._id },
-      { name: 'Sweet Potato', price: 40, storeId: organicHub._id },
-
-      { name: 'Carrot', price: 30, storeId: localGreens._id },
-      { name: 'Spinach', price: 25, storeId: localGreens._id },
-      { name: 'Cabbage', price: 35, storeId: localGreens._id },
+      { name: 'Apple', price: 150, storeId: new mongoose.Types.ObjectId(freshMart._id) },
+      { name: 'Banana', price: 50, storeId: new mongoose.Types.ObjectId(freshMart._id) },
+    
+      { name: 'Avocado', price: 200, storeId: new mongoose.Types.ObjectId(organicHub._id) },
+      { name: 'Broccoli', price: 60, storeId: new mongoose.Types.ObjectId(organicHub._id) },
+      { name: 'Sweet Potato', price: 40, storeId: new mongoose.Types.ObjectId(organicHub._id) },
+    
+      { name: 'Carrot', price: 30, storeId: new mongoose.Types.ObjectId(localGreens._id) },
+      { name: 'Spinach', price: 25, storeId: new mongoose.Types.ObjectId(localGreens._id) },
+      { name: 'Cabbage', price: 35, storeId: new mongoose.Types.ObjectId(localGreens._id) },
     ]);
-
+    
     console.log("🛒 Inserted Products:");
     insertedProducts.forEach(p => {
       console.log(`${p.name} - ₹${p.price} - Store ID: ${p.storeId}`);
