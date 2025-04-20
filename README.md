@@ -32,6 +32,12 @@ npm install
 node sample-data/seed.js  # seed the database
 node server.js            # start the backend server
 ```
+Make sure `.env` is set in your backend URL, e.g.
+
+```
+MONGODB_URI= Your Mongodb url
+PORT= 5000
+```
 
 ### 3. Frontend Setup
 
