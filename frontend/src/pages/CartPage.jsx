@@ -1,6 +1,9 @@
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './CartPage.css'; // Custom styles
 
 const CartPage = () => {
   const { cart, userName, setUserName, clearCart } = useCart();
@@ -9,39 +12,64 @@ const CartPage = () => {
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   const handlePlaceOrder = async () => {
-    const products = cart.map(item => ({
-      productId: item._id,
-      quantity: item.quantity
-    }));
+    if (!userName.trim()) {
+      toast.warn("Please enter your name before placing the order.");
+      return;
+    }
 
-    await axios.post('http://localhost:3000/api/orders', {
-      name: userName,
-      products,
-      total
-    });
+    if (cart.length === 0) {
+      toast.info("Your cart is empty.");
+      return;
+    }
 
-    clearCart();
-    navigate('/order-confirmation');
+    try {
+      const products = cart.map(item => ({
+        productId: item._id,
+        quantity: item.quantity
+      }));
+
+      await axios.post('http://localhost:3000/api/orders', {
+        name: userName,
+        products,
+        total
+      });
+
+      clearCart();
+      toast.success("Order placed successfully!");
+      setTimeout(() => navigate('/order-confirmation'), 1500);
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to place the order. Try again.");
+    }
   };
 
   return (
-    <div className="container">
-      <h2>Your Cart</h2>
-      <ul>
+    <div className="cart-container">
+      <ToastContainer />
+      <h2 className="cart-title">🛒 Your Cart</h2>
+
+      <ul className="cart-list">
         {cart.map(item => (
-          <li key={item._id}>
-            {item.name} - ₹{item.price} × {item.quantity}
+          <li key={item._id} className="cart-item">
+            <span>{item.name}</span>
+            <span>₹{item.price} × {item.quantity}</span>
           </li>
         ))}
       </ul>
-      <p>Total: ₹{total}</p>
+
+      <p className="cart-total">Total: ₹{total}</p>
+
       <input
         type="text"
+        className="name-input"
         placeholder="Your Name"
         value={userName}
         onChange={e => setUserName(e.target.value)}
       />
-      <button onClick={handlePlaceOrder}>Place Order</button>
+
+      <button className="order-button" onClick={handlePlaceOrder}>
+        ✅ Place Order
+      </button>
     </div>
   );
 };
