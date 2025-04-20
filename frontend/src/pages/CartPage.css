@@ -61,4 +61,33 @@
   .order-button:hover {
     background: #218838;
   }
+
+  .item-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 1rem;
+  }
+  
+  .qty-btn {
+    background-color: #ddd;
+    border: none;
+    padding: 4px 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+  
+  .qty-btn:hover {
+    background-color: #ccc;
+  }
+  
+  .item-qty {
+    min-width: 24px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1rem;
+  }
   

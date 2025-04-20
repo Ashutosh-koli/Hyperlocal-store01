@@ -6,7 +6,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import './CartPage.css'; // Custom styles
 
 const CartPage = () => {
-  const { cart, userName, setUserName, clearCart } = useCart();
+  const {
+    cart,
+    userName,
+    setUserName,
+    clearCart,
+    increaseQuantity,
+    decreaseQuantity
+  } = useCart();
+
   const navigate = useNavigate();
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -52,6 +60,11 @@ const CartPage = () => {
         {cart.map(item => (
           <li key={item._id} className="cart-item">
             <span>{item.name}</span>
+            <div className="item-controls">
+              <button className="qty-btn" onClick={() => decreaseQuantity(item._id)}>−</button>
+              <span className="item-qty">{item.quantity}</span>
+              <button className="qty-btn" onClick={() => increaseQuantity(item._id)}>+</button>
+            </div>
             <span>₹{item.price} × {item.quantity}</span>
           </li>
         ))}
