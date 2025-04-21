@@ -4,24 +4,24 @@ import axios from 'axios';
 import { useCart } from '../context/CartContext';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './StorePage.css'; // Custom styles
+import './StorePage.css'; 
 
 const StorePage = () => {
   const { storeId } = useParams();
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true); // Track loading state
+  const [loading, setLoading] = useState(true); 
   const { addToCart } = useCart();
 
   useEffect(() => {
     axios.get(`https://hyperlocal-store01.onrender.com/api/products/${storeId}`)
       .then(res => {
         setProducts(res.data);
-        setLoading(false); // Set loading to false once products are fetched
+        setLoading(false); 
       })
       .catch(err => {
         console.error(err);
         toast.error("Failed to load products");
-        setLoading(false); // Stop loading in case of error
+        setLoading(false); 
       });
   }, [storeId]);
 
