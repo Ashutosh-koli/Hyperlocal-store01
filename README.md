@@ -47,14 +47,6 @@ npm install
 npm run dev               # start the frontend
 ```
 
-Make sure `.env` is set with your backend URL, e.g.
-
-```
-VITE_API_URL=http://localhost:5000/api
-```
-
----
-
 ## 📋 Features
 
 - 🔍 View all nearby stores
