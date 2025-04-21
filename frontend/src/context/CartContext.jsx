@@ -35,7 +35,7 @@ export const CartProvider = ({ children }) => {
             ? { ...item, quantity: item.quantity - 1 }
             : item
         )
-        .filter(item => item.quantity > 0) // remove item if quantity hits 0
+        .filter(item => item.quantity > 0) 
     );
   };
 
